@@ -15,3 +15,11 @@ The following assumes the code is cloned to /opt/splunk_detect
 - you should be able to copy and paste the search into splunk to verify the search syntax
 - setup the crontab, verify the detect_wrapper.sh is correct (in case you changed any file names)
 
+### Programs and Files    
+**master_search_file.py** - Used to parse the Master csv files that contain the metadata for the operational searches. This program also will create the cron file for all the searches for the csv provided to the program - master_search_file.py -h for help.  
+**Splunk_Search_Master.csv** - contains all the metadata needed to run the operational saved searches. Used to more easily maintain the searches we rely on.  
+**splunk.cfg** - credentials and server to use for searching  
+**search_splunk.py** - Send it a search, it will run it and return results  
+**assurance_search.py** - This program uses the master_search_file.py and will parse the csv provided, and run each of those searches sequentially and will print out the results. The intent of this program is to run almost the same searches as the operational searches but use a lookup table that will produce results so we can verify the searches are working correctly.  
+**Splunk_Search_Assurance.csv** - a copy of the Splunk_Search_Master.csv with the lookup table to use changed as well as the schedule as to produce results to verify our searches are still working correctly.  
+**alert.py** - run specified search and write results into alerts table in crits mongo db
